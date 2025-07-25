@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | FashionFiesta</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">MyWebsite</div>
+    <ul class="navbar-links">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('home') }}">Shop</a></li>
+      <li><a href="{{ url_for('men') }}">MEN</a></li>
+      <li><a href="{{ url_for('women') }}">WOMEN</a></li>
+      <li><a href="{{ url_for('kids') }}">KIDS</a></li>
+      <li><a href="{{ url_for('account') }}">Account</a></li>
+      <li><a href="{{ url_for('cart') }}">🛒</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Welcome to FashionFiesta</h1>
+    <p>Trendy fashion, unbeatable prices.</p>
+    <a href="{{ url_for('product') }}" class="shop-btn">Shop Now</a>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured">
+    <h2>Featured Products</h2>
+    <div class="product-grid">
+
+      <a href="{{ url_for('product') }}?id=1" class="product-card">
+        <img src="{{ url_for('static', filename='images/summeer.webp') }}" alt="Product 1" />
+        <h3>Summer T-Shirt</h3>
+        <p>₹1119.99</p>
+      </a>
+
+      <a href="{{ url_for('product') }}?id=2" class="product-card">
+        <img src="{{ url_for('static', filename='images/denim_jeans.webp') }}" alt="Product 2" />
+        <h3>Denim Jeans</h3>
+        <p>₹2219.99</p>
+      </a>
+
+      <a href="{{ url_for('product') }}?id=3" class="product-card">
+        <img src="{{ url_for('static', filename='images/cargo.jpg') }}" alt="Product 3" />
+        <h3>Cargo</h3>
+        <p>₹3319.99</p>
+      </a>
+
+      <a href="{{ url_for('product') }}?id=4" class="product-card">
+        <img src="{{ url_for('static', filename='images/hoodie.jpeg') }}" alt="Product 4" />
+        <h3>Hoodie</h3>
+        <p>₹2319.99</p>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>MyWebsite</h4>
+          <p>Your trusted online store</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('product') }}">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="{{ url_for('static', filename='java/home.js') }}"></script>
+</body>
+</html>
