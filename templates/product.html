@@ -1,0 +1,80 @@
+<!-- templates/product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Products | FashionFiesta</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/product1.css') }}">
+</head>
+<body>
+  <nav class="navbar">
+  <div class="logo">MyWebsite</div>
+  <ul class="navbar-links">
+    <li><a href="{{ url_for('product') }}">Home</a></li>
+    <li><a href="{{ url_for('men') }}">MEN</a></li>
+    <li><a href="{{ url_for('women') }}">WOMEN</a></li>
+    <li><a href="{{ url_for('kids') }}">KIDS</a></li>
+    <li><a href="{{ url_for('product') }}">Shop</a></li>
+   <li><a href="{{ url_for('account') }}">Account</a></li>
+      <a href="{{ url_for('cart') }}">🛒
+    {% if cart_count > 0 %}
+      <span class="cart-badge">{{ cart_count }}</span>
+    {% endif %}
+  </a>
+</li>
+
+  </ul>
+</nav>
+
+    <section class="hero">
+    <h1>Welcome to FashionFiesta</h1>
+    <p>Trendy fashion, unbeatable prices.</p>
+    <a href="{{ url_for('product') }}" class="shop-btn">Shop Now</a>
+  </section>
+<h2 id="xyz">Featured Products</h2>
+  <div class="product-grid">
+    {% for product in products %}
+      <div class="product-card">
+        <a href="{{ url_for('product_detail', product_id=product[0]) }}">
+          <h1>{{ product[1] }}</h1>
+          <img src="{{ url_for('static', filename='images/' + product[3]) }}" alt="{{ product[1] }}">
+          <h2>₹{{ product[4] }}</h2>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+
+ <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>MyWebsite</h4>
+          <p>Your trusted online store</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('product') }}">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

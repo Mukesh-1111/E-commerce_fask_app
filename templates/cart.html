@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+  <div class="logo">MyWebsite</div>
+  <ul class="navbar-links">
+    <li><a href="{{ url_for('product') }}">Home</a></li>
+    <li><a href="{{ url_for('men') }}">MEN</a></li>
+    <li><a href="{{ url_for('women') }}">WOMEN</a></li>
+    <li><a href="{{ url_for('kids') }}">KIDS</a></li>
+    <li><a href="{{ url_for('product') }}">Shop</a></li>
+    <li><a href="{{ url_for('account') }}">Account</a></li>
+      <a href="{{ url_for('cart') }}">🛒
+    {% if cart_count > 0 %}
+      <span class="cart-badge">{{ cart_count }}</span>
+    {% endif %}
+  </a>
+</li>
+
+  </ul>
+</nav>
+  <!-- Cart Section -->
+  <section class="cart-section">
+    <div class="container">
+      <h1>Shopping Cart</h1>
+
+      {% if cart_items %}
+      <div class="cart-content">
+        <!-- Cart Items -->
+        <div class="cart-items">
+          {% set ns = namespace(subtotal=0) %}
+          {% for item in cart_items %}
+            {% set total = item.price * item.quantity %}
+            {% set ns.subtotal = ns.subtotal + total %}
+            <div class="cart-item">
+              <img src="{{ url_for('static', filename='images/' + item.image) }}" width="100">
+              <div class="item-details">
+                <h3>{{ item.name }}</h3>
+                <p>Price: ₹{{ item.price }}</p>
+                <form action="{{ url_for('update_quantity') }}" method="POST" style="display: flex; align-items: center; gap: 10px;">
+                  <input type="hidden" name="item_id" value="{{ item.id }}">
+                  <button type="submit" name="action" value="decrease">➖</button>
+                  <span>{{ item.quantity }}</span>
+                  <button type="submit" name="action" value="increase">➕</button>
+                </form>
+                <p>Total: ₹{{ total }}</p>
+                <form action="{{ url_for('remove_from_cart', item_id=item.id) }}" method="POST">
+                  <button type="submit">Remove</button>
+                </form>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Cart Summary -->
+        {% set shipping = 50 %}
+        {% set tax = ns.subtotal * tax_rate %}
+        {% set total = ns.subtotal + shipping + tax %}
+
+        <div class="cart-summary">
+          <div class="summary-card">
+            <h2>Order Summary</h2>
+            <div class="summary-row"><span>Subtotal:</span><span>₹{{ ns.subtotal }}</span></div>
+            <div class="summary-row"><span>Shipping:</span><span>₹{{ shipping }}</span></div>
+            <div class="summary-row"><span>Tax:</span><span>₹{{ '%.2f' % tax }}</span></div>
+            <div class="summary-row total-row">
+              <span>Total:</span>
+              <span>₹{{ '%.2f' % total }}</span>
+            </div>
+            <form action="{{ url_for('address') }}" method="GET">
+  <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+</form>
+
+            <button class="continue-shopping" onclick="window.location.href='{{ url_for('product') }}'">Continue Shopping</button>
+          </div>
+
+          <!-- Promo Code -->
+          <div class="promo-section">
+            <h3>Have a promo code?</h3>
+            <div class="promo-input-group">
+              <input type="text" placeholder="Enter promo code" class="promo-input" />
+              <button class="apply-btn">Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="empty-cart" id="emptyCart">
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <button class="start-shopping" onclick="window.location.href='{{ url_for('product') }}'">Start Shopping</button>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>MyWebsite</h4>
+          <p>Your trusted online store</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping Info</a></li>
+          </ul></div></div></div></footer></body></html>

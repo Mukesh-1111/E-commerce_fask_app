@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">MyWebsite</div>
+    <ul class="navbar-links">
+      <li><a href="{{ url_for('product') }}">Home</a></li>
+      <li><a href="{{ url_for('men') }}">MEN</a></li>
+      <li><a href="{{ url_for('women') }}">WOMEN</a></li>
+      <li><a href="{{ url_for('kids') }}">KIDS</a></li>
+      <li><a href="{{ url_for('product') }}">Shop</a></li>
+      <li><a href="{{ url_for('account') }}">Account</a></li>
+
+    </ul>
+  </nav>
+
+  <div class="payment-container">
+    <h1>Select Payment Method</h1>
+
+    <form id="payment-form" method="POST" action="{{ url_for('payment') }}">
+      <div class="payment-option">
+        <input type="radio" name="method" value="card" id="card" checked />
+        <label for="card">Debit / Credit Card</label>
+        <div class="method-details" id="card-details">
+          <input type="text" name="card_number" placeholder="Card Number" required />
+          <input type="text" name="card_name" placeholder="Card Holder Name" required />
+          <input type="text" name="card_expiry" placeholder="MM/YY" required />
+          <input type="text" name="card_cvv" placeholder="CVV" required />
+        </div>
+      </div>
+
+      <div class="payment-option">
+        <input type="radio" name="method" value="gpay" id="gpay" />
+        <label for="gpay">Google Pay</label>
+      </div>
+
+      <div class="payment-option">
+        <input type="radio" name="method" value="phonepe" id="phonepe" />
+        <label for="phonepe">PhonePe</label>
+      </div>
+
+      <div class="payment-option">
+        <input type="radio" name="method" value="netbanking" id="netbanking" />
+        <label for="netbanking">Net Banking</label>
+      </div>
+
+      <div class="payment-option">
+        <input type="radio" name="method" value="paypal" id="paypal" />
+        <label for="paypal">PayPal</label>
+      </div>
+
+      <button type="submit">Pay Now</button>
+    </form>
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>MyWebsite</h4>
+          <p>Your trusted online store</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('product') }}">Shop</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Customer Service</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 MyWebsite. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<script>
+  const methodRadios = document.querySelectorAll('input[name="method"]');
+  const cardDetails = document.getElementById('card-details');
+  const cardInputs = cardDetails.querySelectorAll('input');
+
+  function updateCardVisibility() {
+    const selected = document.querySelector('input[name="method"]:checked');
+    if (selected && selected.value === 'card') {
+      cardDetails.style.display = 'block';
+      cardInputs.forEach(input => input.required = true);
+    } else {
+      cardDetails.style.display = 'none';
+      cardInputs.forEach(input => input.required = false);
+    }
+  }
+
+  // Initialize on page load
+  updateCardVisibility();
+
+  // Add event listeners
+  methodRadios.forEach(radio => {
+    radio.addEventListener('change', updateCardVisibility);
+  });
+</script>
+
+
+</body>
+</html>

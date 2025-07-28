@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}FashionFiesta{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Navbar (Shared) -->
+  <nav class="navbar">
+    <div class="logo">MyWebsite</div>
+    <ul class="navbar-links">
+      <li><a href="{{ url_for('home') }}">Home</a></li>
+      <li><a href="{{ url_for('product') }}">Shop</a></li>
+      <li><a href="{{ url_for('men') }}">MEN</a></li>
+      <li><a href="{{ url_for('women') }}">WOMEN</a></li>
+      <li><a href="{{ url_for('kids') }}">KIDS</a></li>
+      <li><a href="{{ url_for('cart') }}">🛒</a></li>
+      <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 MyWebsite. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
