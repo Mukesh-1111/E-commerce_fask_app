@@ -1,9 +1,9 @@
 from flask import flash
 from flask import Flask, render_template,flash, request, redirect, url_for, session, jsonify
-from flask_mysqldb import MySQL
-import MySQLdb.cursors
+# from flask_mysqldb import MySQL
+# import MySQLdb.cursors
 from functools import wraps
-from  decimal import Decimal
+# from  decimal import Decimal
 
 
 app = Flask(__name__)
