@@ -1,23 +1,18 @@
-# Dockerfile
-
 FROM python:3.9-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy everything into the container
+# Copy application files
 COPY . .
 
-# Install system dependencies for MySQL client
+# Install system dependencies required by flask_mysqldb
 RUN apt-get update && \
-    apt-get install -y gcc default-libmysqlclient-dev && \
+    apt-get install -y gcc default-libmysqlclient-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port Flask runs on
 EXPOSE 5000
 
-# Command to run the application
 CMD ["python", "app.py"]
