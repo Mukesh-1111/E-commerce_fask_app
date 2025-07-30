@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # MySQL config
-app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_HOST'] = 'db'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'ecommerce'
@@ -489,4 +489,4 @@ def add_no_cache_headers(response):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
